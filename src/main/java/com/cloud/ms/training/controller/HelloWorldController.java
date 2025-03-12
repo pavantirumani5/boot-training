@@ -1,33 +1,34 @@
 package com.cloud.ms.training.controller;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.cloud.ms.training.controller.model.dto.OrderItemDto;
 import org.springframework.web.bind.annotation.*;
-@SpringBootApplication
+
 @RestController
 public class HelloWorldController {
     @GetMapping("/hello-world")
-    public String getHelloWorld() {
-
-        return "HelloWorld 1";
-    }
-
-    @PostMapping("/hello-world ")
-    public String insertHelloWorld() {
-        return "HelloWorld 1";
-    }
-
-    @PutMapping("/hello-world ")
-    public String updateHelloWorld() {
-        return "HelloWorld 1";
-    }
-
-    @DeleteMapping("/hello-world ")
-    public String deleteHelloWorld() {
-        return "HelloWorld 1";
-    }
-
+    public Integer getHelloWorld(@RequestParam("id")Integer id,@RequestParam("name") String name){
+        System.out.println(id);
+        System.out.println(name);
+        return id;
+}
+    @PostMapping("/hello-world")
+    public OrderItemDto insertHelloWorld(@RequestBody OrderItemDto orderDto) {
+        return orderDto;
+}
+  @PutMapping("/hello-world")
+    public OrderItemDto updateHelloWorld(@RequestBody OrderItemDto orderDto) {
+        orderDto.setPrice(12000);
+        return orderDto;
+  }
+    @ DeleteMapping("/hello-world/{id}/{name}")
+    public Integer deleteHelloWorld(@PathVariable("id") Integer id,@PathVariable("name") String name){
+        System.out.println(id);
+        System.out.println(name);
+        return id;
+}
     @PatchMapping("/hello-world")
     public String partialUpdateHelloWorld() {
-        return "HelloWorld 1";
+
+        return "HelloWorld Patch";
     }
 }
